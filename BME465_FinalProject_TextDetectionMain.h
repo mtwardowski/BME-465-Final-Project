@@ -10,6 +10,7 @@
 #ifndef BME465_FINALPROJECT_TEXTDETECTIONMAIN_H
 #define BME465_FINALPROJECT_TEXTDETECTIONMAIN_H
 
+// Pre-compiler support
 #ifndef WX_PRECOMP
     #include <wx/wx.h>
 #endif
@@ -18,9 +19,8 @@
     #pragma hdrstop
 #endif
 
-#include "sliderFrame.hpp"
-#include "image_processor.hpp"
 
+// needed to declare MyApp as the main activity
 #include <wx/app.h>
 
 #include <wx/button.h>  //p
@@ -37,8 +37,8 @@
 #include <vector>
 #include <algorithm>
 
-// Lab 4
 #include "sliderFrame.hpp"
+#include "image_processor.hpp"
 
 // Define a new application type, each program should derive a class from wxApp
 class MyApp: public wxApp
@@ -130,6 +130,7 @@ enum
 	MENU_FILTER_NONLINEAR_MINIMUM = 105,
 	MENU_FILTER_NONLINEAR_MAXIMUM = 106,
 	MENU_FILTER_EDGE = 107,
+	MENU_FILTER_UNDO= 108,
 
 	//Lab 4
 	MENU_FILTER_BINARIZE = 110,
@@ -140,11 +141,10 @@ enum
 	ID_AreaCalculation = 300,
 
 
-	MENU_FILTER_UNDO= 108,
-
     ID_ToGray = 200,
 
-
+    // Text Detection
+    MENU_FILTER_TEXTDETECTION = 111,
 
     // it is important for the id corresponding to the "About" command to have
     // this standard value as otherwise it won't be handled properly under Mac

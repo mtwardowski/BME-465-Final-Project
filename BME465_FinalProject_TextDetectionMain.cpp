@@ -28,8 +28,8 @@
 #include "resources/min.xpm"
 #include "resources/median.xpm"
 #include "resources/area.xpm"
-
 #include "resources/undo.xpm"
+#include "resources/text.xpm"
 
 
 #include "wx/image.h"
@@ -37,6 +37,7 @@
 // Lab 4
 #include "sliderFrame.hpp"
 
+// Implements MyApp as the main activity.
 wxIMPLEMENT_APP(MyApp);
 
 
@@ -79,6 +80,11 @@ BEGIN_EVENT_TABLE(MyFrame, wxFrame)
 	// Lab 5
 	EVT_LEFT_DOWN(MyFrame::OnLButton)
 	EVT_MENU(ID_AreaCalculation, MyFrame::OnAreaCalculation)
+
+	// Text Detection
+	EVT_MENU(MENU_FILTER_TEXTDETECTION, MyFrame::OnFilter)
+
+
 
 
 END_EVENT_TABLE()
@@ -156,7 +162,6 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size, 
 	// Lab 3/4
 	image_processMenu->Append(MENU_FILTER_BINARIZE,_T("Binarize\tAlt-B"),_T("Binarize"));
 
-
 	// Lab 5
 	image_processMenu->Append(ID_AreaCalculation, _T("&Area Calculation\tAlt-A"),_T("Apply Area Calculation"));
 
@@ -167,6 +172,9 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size, 
 	bAreaCalculation = FALSE;
 	bleftDown = FALSE;
 	dist = 9999;
+
+	// Text Detection
+	image_processMenu->Append(MENU_FILTER_TEXTDETECTION, _T("&Text Detection\tAlt-T"),_T("Text Detection"));
 
     // now append the freshly created menu to the menu bar...
     wxMenuBar *menuBar = new wxMenuBar();
@@ -185,19 +193,22 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size, 
     MyToolBar->AddTool(MENU_FILTER_LP,lp_xpm, _T("Low Pass Filter"));
 	MyToolBar->AddTool(MENU_FILTER_HP,hp_xpm, _T("High Pass Filter"));
 
-	// Lab 2 Place Holders - Icons to be added later
+	// Lab 2 Place Holders
 	MyToolBar->AddTool(MENU_FILTER_NONLINEAR_MEDIAN,median_xpm, _T("Median Filter"));
 	MyToolBar->AddTool(MENU_FILTER_NONLINEAR_MINIMUM,min_xpm, _T("Minimum Filter"));
 	MyToolBar->AddTool(MENU_FILTER_NONLINEAR_MAXIMUM,max_xpm, _T("Maximum Filter"));
 
-	// Lab 3 Place Holders - Icons to be added later
+	// Lab 3 Place Holders
 	MyToolBar->AddTool(MENU_FILTER_EDGE,edge_xpm, _T("Edge Detector"));
 	MyToolBar->AddTool(MENU_FILTER_BINARIZE,binary_xpm, _T("Binarize"));
 
-	// Lab 5 Place Holders - Icons to be added later
+	// Lab 5 Place Holders
 	MyToolBar->AddTool(ID_AreaCalculation,area_xpm,_T("Apply Area Calculation"));
 
 	MyToolBar->AddTool(MENU_FILTER_UNDO,undo_xpm,_T("Undo"));
+
+    // Text Detection
+	MyToolBar->AddTool(MENU_FILTER_TEXTDETECTION,text_xpm,_T("Text Detection"));
 
     MyToolBar->Realize();
     SetToolBar(MyToolBar);

@@ -3099,3 +3099,57 @@
 	"BME465_FinalProject_TextDetectionMain.h"
 	<iostream>
 
+1448508851 source:d:\projects\bme465_finalproject_textdetection\bme465-final-project\image_processor.cpp
+	"image_processor.hpp"
+	"BME465_FinalProject_TextDetectionApp.h"
+	"BME465_FinalProject_TextDetectionMain.h"
+	<vector>
+	<algorithm>
+
+1447993311 d:\projects\bme465_finalproject_textdetection\bme465-final-project\image_processor.hpp
+	"wx/wx.h"
+	<vector>
+	"wx/image.h"
+
+1448507599 d:\projects\bme465_finalproject_textdetection\bme465-final-project\bme465_finalproject_textdetectionapp.h
+	<wx/app.h>
+
+1448568931 d:\projects\bme465_finalproject_textdetection\bme465-final-project\bme465_finalproject_textdetectionmain.h
+	<wx/wx.h>
+	<wx/app.h>
+	<wx/button.h>
+	<wx/statline.h>
+	"wx/slider.h"
+	"wx/toolbar.h"
+	"wx/utils.h"
+	"wx/image.h"
+	"wx/filedlg.h"
+	"wx/pen.h"
+	"math.h"
+	<cstdio>
+	<vector>
+	<algorithm>
+	"sliderFrame.hpp"
+	"image_processor.hpp"
+
+1444701152 d:\projects\bme465_finalproject_textdetection\bme465-final-project\sliderframe.hpp
+	"wx/wxprec.h"
+	"wx/wx.h"
+	"wx/splitter.h"
+	"wx/toolbar.h"
+	"wx/utils.h"
+	"wx/image.h"
+	"wx/filedlg.h"
+	"wx/pen.h"
+	"math.h"
+	"image_processor.hpp"
+
+1448512121 source:d:\projects\bme465_finalproject_textdetection\bme465-final-project\resource.rc
+	"wx/msw/wx.rc"
+
+1448508851 source:d:\projects\bme465_finalproject_textdetection\bme465-final-project\sliderframe.cpp
+	"sliderFrame.hpp"
+	"BME465_FinalProject_TextDetectionApp.h"
+	"BME465_FinalProject_TextDetectionMain.h"
+	<iostream>
+
