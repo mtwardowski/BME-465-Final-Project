@@ -11,6 +11,18 @@
 #include <vector>
 #include "wx/image.h"
 
+//Text Detection
+#include <vector>
+
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <iostream>
+
+//Text Detection
+using namespace cv;
+using namespace std;
+
 enum
 {
 	MEDIAN = 104,
@@ -29,5 +41,9 @@ wxImage* NonLinear(wxImage *pImage, int type);
 wxImage* copy(wxImage *masterImage);
 wxImage* Edge(wxImage *pImage);
 wxImage* Binarize(wxImage*pImage, int threshold);
+
+// Text Detection
+wxImage* TextDetection(wxImage* pImage);
+vector<Rect> detectLetters(Mat cvImg);
 
 #endif

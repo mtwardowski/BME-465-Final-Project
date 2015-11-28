@@ -7,6 +7,16 @@
 #include <vector> //FOR MEDIAN FILTER
 #include <algorithm> //FOR SORT()
 
+//Text Detection
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <iostream>
+
+//Text Detection
+using namespace cv;
+using namespace std;
+
 // Implementation of the routines
 void wxImage2grayBuffer(const wxImage* img, int* buffer)
 {
@@ -346,4 +356,53 @@ wxImage *Binarize(wxImage *pImage, int threshold){
 	temp = grayBuffer2wxImage( pResult, width,height );
 	delete pResult;
 	return temp;
+}
+
+wxImage* TextDetection(wxImage* pImage)
+{
+    int* pResult;
+
+    // Converts wxImage to cvImage
+    int w = pImage->GetWidth();
+    int h = pImage->GetHeight();
+    int mapping[] = {0,2,1,1,2,0}; // WX(RGB) to CV(BGR)
+    Mat cvRGBImg(h, w, CV_8UC3, pImage->GetData());
+    Mat cvImg = Mat(h, w, CV_8UC3);
+    mixChannels(&cvRGBImg, 1, &cvImg, 1, mapping, 3);
+
+    //Detect text areas
+    vector<Rect> letterBBoxes1=detectLetters(cvImg);
+
+    //Creates new image with rectangles around text
+    for(int i=0; i< letterBBoxes1.size(); i++)
+        rectangle(cvImg,letterBBoxes1[i],Scalar(0,255,0),3,8,0);
+    imwrite( "imgOut1.jpg", cvImg); // confirm conversion to cvImage
+
+    // Convert cvImg to wxImage
+    wxImage* temp = new wxImage(w,h,cvImg.data);
+    temp->SaveFile(wxT("raw.jpg"),wxBITMAP_TYPE_JPEG); // confirms conversion to wximage
+    //return temp;
+}
+
+vector<Rect> detectLetters(Mat cvImg)
+{
+vector<Rect> boundRect;
+    Mat img_gray, img_sobel, img_threshold, element;
+    cvtColor(cvImg, img_gray, CV_BGR2GRAY);
+    Sobel(img_gray, img_sobel, CV_8U, 1, 0, 3, 1, 0, BORDER_DEFAULT);
+    threshold(img_sobel, img_threshold, 0, 255, CV_THRESH_OTSU+CV_THRESH_BINARY);
+    element = getStructuringElement(MORPH_RECT, Size(17, 3) );
+    morphologyEx(img_threshold, img_threshold, CV_MOP_CLOSE, element); //Does the trick
+    vector<vector<Point> > contours;
+    findContours(img_threshold, contours, 0, 1);
+    vector<vector<Point> > contours_poly( contours.size() );
+    for( int i = 0; i < contours.size(); i++ )
+        if (contours[i].size()>100)
+        {
+            approxPolyDP(Mat(contours[i]), contours_poly[i], 3, true );
+            Rect appRect( boundingRect(Mat(contours_poly[i]) ));
+            if (appRect.width>appRect.height)
+                boundRect.push_back(appRect);
+        }
+    return boundRect;
 }

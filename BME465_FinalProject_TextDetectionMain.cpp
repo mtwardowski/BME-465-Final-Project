@@ -397,6 +397,7 @@ void MyFrame::OnFilter( wxCommandEvent& event )
 									   makeSlider(BIN_SLIDER, 128,0,255);
 									   Filtered = Binarize(masterImage,sliderValue );}
 									   break;
+               case MENU_FILTER_TEXTDETECTION: Filtered = TextDetection(pImage); break;
 			}
 
             pImage = Filtered;
