@@ -3099,17 +3099,26 @@
 	"BME465_FinalProject_TextDetectionMain.h"
 	<iostream>
 
-1448508851 source:d:\projects\bme465_finalproject_textdetection\bme465-final-project\image_processor.cpp
+1448674802 source:d:\projects\bme465_finalproject_textdetection\bme465-final-project\image_processor.cpp
 	"image_processor.hpp"
 	"BME465_FinalProject_TextDetectionApp.h"
 	"BME465_FinalProject_TextDetectionMain.h"
 	<vector>
 	<algorithm>
+	<opencv2/core/core.hpp>
+	<opencv2/highgui/highgui.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+	<iostream>
 
-1447993311 d:\projects\bme465_finalproject_textdetection\bme465-final-project\image_processor.hpp
+1448594104 d:\projects\bme465_finalproject_textdetection\bme465-final-project\image_processor.hpp
 	"wx/wx.h"
 	<vector>
 	"wx/image.h"
+	<vector>
+	<opencv2/core/core.hpp>
+	<opencv2/highgui/highgui.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+	<iostream>
 
 1448507599 d:\projects\bme465_finalproject_textdetection\bme465-final-project\bme465_finalproject_textdetectionapp.h
 	<wx/app.h>
@@ -3152,4 +3161,40 @@
 	"BME465_FinalProject_TextDetectionApp.h"
 	"BME465_FinalProject_TextDetectionMain.h"
 	<iostream>
+
+1448584723 source:d:\projects\bme465_finalproject_textdetection\bme465-final-project\bme465_finalproject_textdetectionmain.cpp
+	"wx_pch.h"
+	"BME465_FinalProject_TextDetectionMain.h"
+	"resources/lp.xpm"
+	"resources/hp.xpm"
+	"resources/binary.xpm"
+	"resources/edge.xpm"
+	"resources/max.xpm"
+	"resources/min.xpm"
+	"resources/median.xpm"
+	"resources/area.xpm"
+	"resources/undo.xpm"
+	"resources/text.xpm"
+	"wx/image.h"
+	"sliderFrame.hpp"
+
+1444701174 d:\projects\bme465_finalproject_textdetection\bme465-final-project\resources\lp.xpm
+
+1444701170 d:\projects\bme465_finalproject_textdetection\bme465-final-project\resources\hp.xpm
+
+1445457326 d:\projects\bme465_finalproject_textdetection\bme465-final-project\resources\binary.xpm
+
+1445457336 d:\projects\bme465_finalproject_textdetection\bme465-final-project\resources\edge.xpm
+
+1445457346 d:\projects\bme465_finalproject_textdetection\bme465-final-project\resources\max.xpm
+
+1445457370 d:\projects\bme465_finalproject_textdetection\bme465-final-project\resources\min.xpm
+
+1445457360 d:\projects\bme465_finalproject_textdetection\bme465-final-project\resources\median.xpm
+
+1445457316 d:\projects\bme465_finalproject_textdetection\bme465-final-project\resources\area.xpm
+
+1444701176 d:\projects\bme465_finalproject_textdetection\bme465-final-project\resources\undo.xpm
+
+1448570349 d:\projects\bme465_finalproject_textdetection\bme465-final-project\resources\text.xpm
 
