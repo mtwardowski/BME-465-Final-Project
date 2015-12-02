@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Release" />
-	<File name="resource.rc" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="35" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="BME465_FinalProject_TextDetectionMain.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="13368" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="BME465_FinalProject_TextDetectionMain.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2377" topLine="66" />
@@ -18,12 +8,17 @@
 	</File>
 	<File name="image_processor.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="10879" topLine="368" />
+			<Cursor1 position="11952" topLine="395" />
 		</Cursor>
 	</File>
-	<File name="sliderFrame.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="image_processor.hpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="301" topLine="0" />
+			<Cursor1 position="1227" topLine="22" />
+		</Cursor>
+	</File>
+	<File name="resource.rc" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="35" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="sliderFrame.hpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -31,9 +26,14 @@
 			<Cursor1 position="335" topLine="24" />
 		</Cursor>
 	</File>
-	<File name="image_processor.hpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="BME465_FinalProject_TextDetectionMain.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1227" topLine="22" />
+			<Cursor1 position="13368" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="sliderFrame.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="301" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

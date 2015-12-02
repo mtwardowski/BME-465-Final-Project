@@ -379,8 +379,27 @@ wxImage* TextDetection(wxImage* pImage)
     imwrite( "imgOut1.jpg", cvImg); // confirm conversion to cvImage
 
     // Convert cvImg to wxImage
-    wxImage* temp = new wxImage(w,h,cvImg.data);
-    temp->SaveFile(wxT("raw.jpg"),wxBITMAP_TYPE_JPEG); // confirms conversion to wximage
+    //wxImage* temp = new wxImage(w,h,cvImg.data);
+    //temp->SaveFile(wxT("raw.jpg"),wxBITMAP_TYPE_JPEG); // confirms conversion to wximage
+
+    unsigned long pix_index = 0, byte_index=0;
+    unsigned long buffer_len;
+    unsigned char* img_buffer;
+
+    wxImage* img = new wxImage(w,h);
+    buffer_len = w*h*3;
+    img_buffer = new unsigned char[w*h*3];
+
+    for( pix_index=0, byte_index=0; pix_index<buffer_len; pix_index++ )
+    {
+        img_buffer[byte_index++] = (unsigned char)cvImg.data[pix_index];
+        //img_buffer[byte_index++] = (unsigned char)cvImg.data[pix_index];
+        //img_buffer[byte_index++] = (unsigned char)cvImg.data[pix_index];
+    }
+
+    img->SetData(img_buffer);
+
+    return img;
     //return temp;
 }
 
@@ -389,7 +408,8 @@ vector<Rect> detectLetters(Mat cvImg)
 vector<Rect> boundRect;
     Mat img_gray, img_sobel, img_threshold, element;
     cvtColor(cvImg, img_gray, CV_BGR2GRAY);
-    Sobel(img_gray, img_sobel, CV_8U, 1, 0, 3, 1, 0, BORDER_DEFAULT);
+    // CV_8U is an unsigned 8bit/pixel dx = 1, dy = 1, kernel size = 3
+    Sobel(img_gray, img_sobel, CV_8U, 1, 1, 3, 1, 0, BORDER_DEFAULT);
     threshold(img_sobel, img_threshold, 0, 255, CV_THRESH_OTSU+CV_THRESH_BINARY);
     element = getStructuringElement(MORPH_RECT, Size(17, 3) );
     morphologyEx(img_threshold, img_threshold, CV_MOP_CLOSE, element); //Does the trick
