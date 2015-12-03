@@ -360,14 +360,13 @@ wxImage *Binarize(wxImage *pImage, int threshold){
 
 wxImage* TextDetection(wxImage* pImage)
 {
-    int* pResult;
-
     // Converts wxImage to cvImage
     int w = pImage->GetWidth();
     int h = pImage->GetHeight();
     int mapping[] = {0,2,1,1,2,0}; // WX(RGB) to CV(BGR)
     Mat cvRGBImg(h, w, CV_8UC3, pImage->GetData());
     Mat cvImg = Mat(h, w, CV_8UC3);
+    // (Source, matrix number, output, matrix number, from/to, #index pairs)
     mixChannels(&cvRGBImg, 1, &cvImg, 1, mapping, 3);
 
     //Detect text areas
@@ -375,13 +374,10 @@ wxImage* TextDetection(wxImage* pImage)
 
     //Creates new image with rectangles around text
     for(int i=0; i< letterBBoxes1.size(); i++)
-        rectangle(cvImg,letterBBoxes1[i],Scalar(0,255,0),3,8,0);
+        rectangle(cvImg,letterBBoxes1[i],Scalar(0,255,0),2,8,0); // (input, color, line width, line type , bit fractions)
     imwrite( "imgOut1.jpg", cvImg); // confirm conversion to cvImage
 
-    // Convert cvImg to wxImage
-    //wxImage* temp = new wxImage(w,h,cvImg.data);
-    //temp->SaveFile(wxT("raw.jpg"),wxBITMAP_TYPE_JPEG); // confirms conversion to wximage
-
+    // Convert from cvImg to wxImage
     unsigned long pix_index = 0, byte_index=0;
     unsigned long buffer_len;
     unsigned char* img_buffer;
@@ -393,26 +389,34 @@ wxImage* TextDetection(wxImage* pImage)
     for( pix_index=0, byte_index=0; pix_index<buffer_len; pix_index++ )
     {
         img_buffer[byte_index++] = (unsigned char)cvImg.data[pix_index];
-        //img_buffer[byte_index++] = (unsigned char)cvImg.data[pix_index];
-        //img_buffer[byte_index++] = (unsigned char)cvImg.data[pix_index];
     }
 
+    // Sets img data to converted values
     img->SetData(img_buffer);
 
     return img;
-    //return temp;
 }
 
 vector<Rect> detectLetters(Mat cvImg)
 {
 vector<Rect> boundRect;
+    // Creates a matrix containing new variables.
     Mat img_gray, img_sobel, img_threshold, element;
+
+    // Convert to gray images
     cvtColor(cvImg, img_gray, CV_BGR2GRAY);
+
+    // Edge detection
     // CV_8U is an unsigned 8bit/pixel dx = 1, dy = 1, kernel size = 3
     Sobel(img_gray, img_sobel, CV_8U, 1, 1, 3, 1, 0, BORDER_DEFAULT);
+    // CV_THRESH_OTSU overrides the specified threshold
     threshold(img_sobel, img_threshold, 0, 255, CV_THRESH_OTSU+CV_THRESH_BINARY);
+    // defines a structure, element, to be a rectangle of size 17x3
     element = getStructuringElement(MORPH_RECT, Size(17, 3) );
-    morphologyEx(img_threshold, img_threshold, CV_MOP_CLOSE, element); //Does the trick
+    // (input, output, operator, structure)
+    /*CV_MOP_Close - anything smaller than the size of Structure are filled,
+    yet the original sizes of the primary foreground features are maintained.*/
+    morphologyEx(img_threshold, img_threshold, CV_MOP_CLOSE, element); //Applies element
     vector<vector<Point> > contours;
     findContours(img_threshold, contours, 0, 1);
     vector<vector<Point> > contours_poly( contours.size() );
@@ -422,6 +426,7 @@ vector<Rect> boundRect;
             approxPolyDP(Mat(contours[i]), contours_poly[i], 3, true );
             Rect appRect( boundingRect(Mat(contours_poly[i]) ));
             if (appRect.width>appRect.height)
+                // push_back adds a new element to the vector at the end
                 boundRect.push_back(appRect);
         }
     return boundRect;
